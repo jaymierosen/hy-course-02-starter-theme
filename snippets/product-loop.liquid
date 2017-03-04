@@ -1,19 +1,49 @@
+<div class="product-loop--item">
+  <a href="{{ product.url | within: collection }}">
+    <img src="{{ product.featured_image.src | product_img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}" />
+    <p>{{ product.title }}</p>
+    <p>
+      {% if product.price_varies %}From{% endif %}
+      {{ product.price | money }}
+    </p>
+  </a>
+  <div class="product--quick-add-modal modal hidden" id="{{product.id}}-modal">
+    <span class="close modal-close">✖</span>
+  <!-- 
+  add info to the modal to allow for quick purchasing products on the homepage. You can create your own modal if you like 😀.
 
-<div class="left {% cycle '','','','last' %}">
-  <div>
-    <a href="{{ product.url | within: collection }}">
-      <img src="{{ product.featured_image.src | product_img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}" />
-    </a>
+  Remember to:
+
+  1. include an option to select the desired product variant only if multiple variants exist
+  2. use the variant id to add the product
+  3. Only allow a customer to try and add an available variant / product to their cart
+  4. Make sure to alert the user to different prices that exist for different variants
+  5. Account for if all stock of an item has been added to the cart
+  6. Provide a message to the user to confirm successful submission of the item to the cart
+  
+   -->
+      <h3>{{product.title}} - {% if product.variants.size > 1 %}from {% endif %}{{ product.price | money}}</h3>
+      <form class="js-add-to-cart-form"> 
+        <!-- **BONUS** allow the customer to select to add more than one of a product to the cart at a time -->
+        <label for="quantity">Quantity</label>
+        <input type="number" name="quantity">
+        {% if product.variants.size > 1 %}
+          <label for="variant">Size</label>
+          <select name="variant" id="{{product.id}}_variant">
+            <option value="" disabled selected>select a size</option>
+            {% for variant in product.variants %}
+              <option value="{{variant.id}}">{{variant.title}} - {{variant.price | money}}</option>
+            {% endfor %}
+          </select>
+        {% else %}  
+          <input type="hidden" name="variant" value="{{product.variants.first.id}}">
+        {% endif %}  
+        <input type="submit" value="buy">
+      </form>
   </div>
-  <div>
-    <a href="{{ product.url | within: collection }}">
-        {{ product.title }}
-      </a>
-  </div>
-  <div >
-    {% if product.price_varies %}From{% endif %}
-    {{ product.price | money }}
-    <button class="js-add-to-cart" data-id="{{product.variants[0].id}}">Add to Cart</button>
-    <button class="js-cart-remove" data-id="{{product.variants[0].id}}">Remove item</button>
-  </div>
+  <button {% if product.available %} class="add-to-cart btn" data-modal="{{product.id}}-modal" {% else %} class="btn sold-out" {% endif %}>{% if product.available %}Quick Purchase{% else %}Sold Out{% endif %}</button>
 </div>
+
+<!-- **DOUBLE BONUS** add a cart icon with counter to the nav of your site. update the cart count when a product is added through the quick purchase -->
+
+

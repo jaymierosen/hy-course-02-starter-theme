@@ -80,11 +80,23 @@
 
       </div>
     </form>
-
-
+    <!--shipping calculator form-->
+    <div class="shipping-calculator">
+        <form id="shipping-calculator">
+            <label for="zip">Postal / Zip Code</label>
+            <input type="text" name="zip" id="zip">
+            <label for="country">Country</label>
+            <input type="text" name="country" id="country">
+            <label for="province">Province / State</label>
+            <input type="text" name="province" id="province">
+            <input type="submit" value="check shipping rate">
+        </form>
+        <div id="shipping-estimate"></div>
+    </div>
+    <!--shipping calculator form-->
   {% else %}
 
-  <p>There's noting in the cart</p>
+  <p>There's nothing in the cart</p>
 
   {% endif %}
 </div>

@@ -2,8 +2,19 @@
 // VARIABLES
 $grey: #7c7c7c;
 $light-grey: #f0f1f2;
-$hl-color: {{settings.hl_color}};
+$hl-color: {{ settings.hl_color }};
+$hero: url({{ settings.hero_image | img_url: '2048x2048' }});
+$font-family: {{ settings.font_family }};
 
+{% if settings.font_family %}
+body {
+	font-family: $font-family;
+}
+{% else %} 
+body {
+	font-family: cursive;
+}
+{% endif %}
 
 //ELEMENTS
 .page-content {
@@ -168,16 +179,20 @@ footer {
 .header--large {
 	height: 50vh;
 	display:flex;
-	background: $light-grey;
+	{% if settings.bg_image %} //will default to true
+		background-image: $hero;
+	{% else %}
+		background: $light-grey;
+	{% endif %}
+	background-repeat: no-repeat;
+	background-size: cover;
 	h1 {
 		margin: auto;
 	}
 }
 
 //GENERICS
-body {
-	
-}
+
 .wrapper {
 	width: 80%;
 	max-width: 1020px;

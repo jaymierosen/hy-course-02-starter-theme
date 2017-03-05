@@ -1,22 +1,55 @@
 [
-  {
-    "name": "Welcome",
-    "settings": [
-      {
-        "type": "paragraph",
-        "content": "Theme Settings ✌️"
-      }
-    ]
-  }, 
-  {
-      "name": "Colors",
-      "settings": [
-        {
-          "type": "color",
-          "id": "hl_color",
-          "label": "Highlight Color 🎨",
-          "default": "#1b52dd"
-        }
-      ]
-    }
+	{
+		"name": "Welcome",
+		"settings": [
+			{
+				"type": "paragraph",
+				"content": "Theme Settings ✌️"
+			}
+		]
+	}, 
+	{
+		"name": "Colors",
+		"settings": [
+			{
+				"type": "color",
+				"id": "hl_color",
+				"label": "Highlight Color 🎨",
+				"default": "#1b52dd"
+			}
+		]
+	},
+	{
+		"name": "Logo",
+		"settings": [
+			{
+				"type": "image_picker",
+				"id": "custom_logo",
+				"label": "Logo",
+				"info": "Choose a logo"
+			}
+		]
+	},
+	{
+		"name": "Hero Image",
+		"settings": [
+			{
+				"type": "image_picker",
+				"id": "hero_image",
+				"label": "Hero Image",
+				"info": "Choose a hero image"
+			}
+		]
+	},
+	{
+		"name": "Font Family",
+		"settings": [
+			{
+				"type": "font",
+				"id": "font_family",
+				"label": "Text",
+				"info": "Text"
+			}
+		]
+	}
 ]

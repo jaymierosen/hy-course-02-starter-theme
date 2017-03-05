@@ -16,6 +16,22 @@ body {
 }
 {% endif %}
 
+//headers 
+.header--large {
+	height: 50vh;
+	display:flex;
+	{% if settings.hero_image %} //will default to true
+		background: $hero;
+	{% else %}
+		background: $light-grey;
+	{% endif %}
+	background-repeat: no-repeat;
+	background-size: cover;
+	h1 {
+		margin: auto;
+	}
+}
+
 //ELEMENTS
 .page-content {
 	min-height: 80vh;
@@ -175,21 +191,7 @@ footer {
 	width: 100%;
 }
 
-//headers 
-.header--large {
-	height: 50vh;
-	display:flex;
-	{% if settings.bg_image %} //will default to true
-		background-image: $hero;
-	{% else %}
-		background: $light-grey;
-	{% endif %}
-	background-repeat: no-repeat;
-	background-size: cover;
-	h1 {
-		margin: auto;
-	}
-}
+
 
 //GENERICS
 

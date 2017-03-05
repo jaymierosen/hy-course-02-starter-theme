@@ -1,0 +1,99 @@
+{% schema %}
+	{
+		"name": "gallery",
+		"class": "featured-gallery",
+		"settings": [
+			{
+				"id": "overlay_bg_colour",
+				"type": "color",
+				"label": "Overlay Background Colour", 
+				"info": "Pick a overlay colour",
+				"default": "#bada55"
+			},
+			{
+				"id": "overlay_text_colour",
+				"type": "color",
+				"label": "Gallery Overlay Text Colour", 
+				"info": "Pick a overlay text colour",
+				"default": "#FFFFFF"
+			}
+		],
+		"blocks": [
+			{
+				"name": "gallery_image",
+				"type": "image_picker",
+				"settings": [
+					{
+						"id": "gallery_image",
+						"type": "image_picker",
+						"label": "Gallery Image", 
+						"info": "Upload an image to be added to the image gallery on the homepage"
+					},
+					{
+						"id": "overlay_text",
+						"type": "text",
+						"label": "Overlay Text",
+						"info": "Put some text!"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}
+
+{% for block in section.blocks%}
+<!-- 	<div class="featured-gallery"> -->
+	<figure>
+		<img src="{{ block.settings.gallery_image | img_url: 'grande' }}">
+		<figcaption><h3>{{ block.settings.overlay_text }}</h3></figcaption>
+	</figure>
+<!-- 	</div> -->
+{% endfor %}
+
+{% stylesheet %}
+	.featured-gallery {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		margin: 60px 0;
+	}
+	.featured-gallery figure {
+		width: 30%;
+		margin-right: 5%;
+		margin-bottom: 5%;
+		position: relative;
+	}
+	.featured-gallery figure:hover figcaption {
+		display: flex;
+	}
+	.featured-gallery img {
+		width: 100%;
+		display: block;
+	}
+	.featured-gallery figcaption {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		display: none;
+		transition: 0.5s background ease-in;
+	}
+	.featured-gallery figcaption h3 {
+		margin: 0 auto;
+	}
+	.featured-gallery figure:nth-of-type(3n + 3){
+		margin-right: 0;
+	}
+{% endstylesheet %}
+
+<style>
+	figcaption {
+		background: {{ section.settings.overlay_bg_colour }};
+/*		color: {{ section.settings.overlay_text_colour }};*/
+		color: {{ settings.hl_color }};
+	}
+</style>
+
+<!-- {% javascript %}
+{% endjavascript %} -->
